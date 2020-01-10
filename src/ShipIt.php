@@ -26,7 +26,7 @@ class ShipIt
 
     protected $email = null;
     protected $token = null;
-    protected $apiBase = 'http://api.shipit.cl/v/';
+    protected $apiBase = 'https://api.shipit.cl/v/';
 
     protected $environment = 'production';
 
