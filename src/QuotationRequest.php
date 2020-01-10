@@ -8,7 +8,7 @@ class QuotationRequest
 
     private $validProperties = array(
         'commune_id',
-        'courrier_for_client',
+        // 'courrier_for_client',
         'destiny',
         'height',
         'is_payable',
@@ -19,7 +19,7 @@ class QuotationRequest
 
     private $data = array(
         'commune_id' => null,
-        'courrier_for_client' => '',
+        // 'courrier_for_client' => '',
         'destiny' => 'Domicilio',
         'height' => 0,
         //'is_payable' => false,
@@ -65,7 +65,7 @@ class QuotationRequest
     public function toShipItFormat()
     {
         $data = $this->data;
-        $data['address_attributes']['commune_id'] = $data['commune_id'];
+        $data['to_commune_id'] = $data['commune_id'];
         unset($data['commune_id']);
 
         if(is_null($data['weight'])){

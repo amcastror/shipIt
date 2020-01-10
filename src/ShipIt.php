@@ -142,7 +142,7 @@ class ShipIt
      * @throws ConnectException
      * @return object
      */
-    public function get($method, $endpoint, array $data = null)
+    public function get($method, $endpoint, array $data = null, $version = 'v2')
     {
         if ($this->token === null) {
             throw new TokenNotFoundException();
@@ -161,7 +161,7 @@ class ShipIt
                     'Content-Type' => 'application/json',
                     'X-Shipit-Email' => $this->email,
                     'X-Shipit-Access-Token' => $this->token,
-                    'Accept' => 'application/vnd.shipit.v2'
+                    'Accept' => "application/vnd.shipit.$version"
                 ]
             ];
 
@@ -348,12 +348,12 @@ class ShipIt
     public function getQuotation(QuotationRequest $request)
     {
         $data = $request->toShipItFormat();
-        $response = $this->get(self::METHOD_POST, '/shippings/prices', $data);
+        $response = $this->get(self::METHOD_POST, '/prices', $data, 'v3');
 
         $quotation = new Quotation;
-        if (isset($response->shipments)) {
-            foreach ($response->shipments as $shipment) {
-                $quotation->add($shipment);
+        if (isset($response->prices)) {
+            foreach ($response->prices as $price) {
+                $quotation->add($price);
             }
         }
 

@@ -17,11 +17,11 @@ class QuotationItem
     {
         if ($response) {
             $this->data = [
-                "courier" => $response->courier,
-                "delivery_time" => $response->delivery_time,
-                "interval" => $response->interval,
-                "pv" => $response->pv,
-                "total" => $response->total
+                "courier" => $response->courier->name,
+                "delivery_time" => $response->days,
+                // "interval" => $response->days,
+                "pv" => $response->volumetric_weight,
+                "total" => $response->price
             ];
         }
     }
